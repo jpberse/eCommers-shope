@@ -73,7 +73,7 @@ const activeStyle = 'underline underline-offset-4'
 
 
     return(
-        <nav className='flex justify-between items-center fixed z-10 w-full py-5 px-8 text-sm font-normal top-0'>
+        <nav className='flex justify-between items-center fixed z-10 w-full py-5 px-8 text-sm font-normal top-0 bg-white'>
             <ul className='flex items-center gap-3'>
                 {menuLeft.map((item, index) => (
                     <li
