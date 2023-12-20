@@ -3,7 +3,6 @@ import { ShoppingCartContext } from "../../Context";
 
 function ProductDetail() {
     const { isProductDetailOpen, toggleProductDetail, productToShow  } = useContext(ShoppingCartContext)
-    console.log('PRODUCT TO SHOW: ', productToShow);
     const { image, title, price, description } = {...productToShow}
 
     return(
