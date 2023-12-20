@@ -2,7 +2,9 @@ import { useContext } from "react"
 import { ShoppingCartContext } from "../../Context";
 
 function ProductDetail() {
-    const { isProductDetailOpen, toggleProductDetail } = useContext(ShoppingCartContext)
+    const { isProductDetailOpen, toggleProductDetail, productToShow  } = useContext(ShoppingCartContext)
+    console.log('PRODUCT TO SHOW: ', productToShow);
+    const { images, title, price, description } = {...productToShow}
 
     return(
         <aside className={`${isProductDetailOpen ? 'flex' : 'hidden'} flex-col fixed right-0 top-[68px] border bg-white border-black rounded-lg w-[360px] h-[calc(100vh-68px)]`}>
@@ -14,6 +16,14 @@ function ProductDetail() {
                     </svg>
                 </button>
             </div>
+            <figure className='px-6'>
+                <img className='w-full h-full rounded-lg' src={images} alt={title} />
+            </figure>
+            <p className='flex flex-col p-6'>
+                <span className='font-medium text-2xl mb-2'>${price}</span>
+                <span className='font-medium text-md'>{title}</span>
+                <span className='font-light text-md'>{description}</span>
+            </p>
         </aside>
     )
 }
