@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Card } from "../../Components/Card";
 import { apiUrl } from "../../api";
 import { ProductDetail } from "../../Components/ProductDetail";
+import { CheckoutSideMenu } from "../../Components/CheckoutSideMenu";
 
 function Home() {
     const [products, setProducts] = useState(null)
@@ -29,6 +30,7 @@ function Home() {
     return(
         <div>
             Home
+            <CheckoutSideMenu />
             <ProductDetail />
             <section className='grid gap-4 grid-cols-4 w-full max-w-screen-lg'>
             {
