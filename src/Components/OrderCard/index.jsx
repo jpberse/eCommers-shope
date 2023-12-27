@@ -1,7 +1,9 @@
+import PropTypes from 'prop-types';
+
 function OrderCard({ image, title, price }) {
 
     return (
-        <div className='flex justify-between items-center '>
+        <div className='flex justify-between items-center mb-3'>
             <div className='flex items-center gap-2'>
                 <figure className='w-20 h-20'>
                     <img className='w-20 h-20 rounded-lg object-contain' src={image} alt={title}/>

@@ -3,10 +3,10 @@ import { ShoppingCartContext } from "../../Context";
 import { OrderCard } from "../OrderCard";
 
 function CheckoutSideMenu() {
-    const { isCheckoutSideMenu, closeCheckoutMenu, productToShow, carProducts  } = useContext(ShoppingCartContext)
+    const { isCheckoutSideMenu, closeCheckoutMenu, carProducts  } = useContext(ShoppingCartContext)
 
     return(
-        <aside className={`${isCheckoutSideMenu ? 'flex' : 'hidden'} flex-col fixed right-0 top-[68px] border bg-white border-black rounded-lg w-[360px] h-[calc(100vh-68px)] m-2`}>
+        <aside className={`${isCheckoutSideMenu ? 'flex' : 'hidden'} flex-col fixed right-0 top-[68px] border bg-white border-black rounded-lg w-[360px] h-[calc(100vh-68px)] m-2 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-gray-300'`}>
             <div className='flex justify-between items-center'>
                 <h2 className='font-medium text-xl p-6'>My Order</h2>
                 <button className='m-2' onClick={() => closeCheckoutMenu()}>
@@ -15,7 +15,7 @@ function CheckoutSideMenu() {
                     </svg>
                 </button>
             </div>
-            <div className='px-6'>
+            <div className='px-6 overflow-y-scroll'>
                 {
                     carProducts.map(product => (
                         <OrderCard {...product}/>

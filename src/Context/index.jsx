@@ -8,6 +8,17 @@ export function ShoppingCartProvider ({ children }){
 
     // shopping Cart · Add products to cart
     const [carProducts, setCartProducts] = useState([])
+    function onAdd(product){
+        const productExists = cartProducts.some(that => that.id === product.id);
+
+        if(productExists) {
+            const productcart = carProducts.find(that => that.id === product.id);
+            productcart.quantity += 1;
+        } else {
+            product.quantity += 1;
+            setCartProducts([...carProducts, product])
+        }
+    }
 
     // Product Detail · Open/close
     const [isProductDetailOpen, setIsProductDetailOpen] = useState(false)
