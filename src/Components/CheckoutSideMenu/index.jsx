@@ -3,7 +3,7 @@ import { ShoppingCartContext } from "../../Context";
 import { OrderCard } from "../OrderCard";
 
 function CheckoutSideMenu() {
-    const { isCheckoutSideMenu, closeCheckoutMenu, carProducts  } = useContext(ShoppingCartContext)
+    const { isCheckoutSideMenu, closeCheckoutMenu, carProducts, setCartProducts} = useContext(ShoppingCartContext)
 
     return(
         <aside className={`${isCheckoutSideMenu ? 'flex' : 'hidden'} flex-col fixed right-0 top-[68px] border bg-white border-black rounded-lg w-[360px] h-[calc(100vh-68px)] m-2 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-gray-300'`}>
@@ -18,7 +18,7 @@ function CheckoutSideMenu() {
             <div className='px-6 overflow-y-scroll'>
                 {
                     carProducts.map(product => (
-                        <OrderCard {...product}/>
+                        <OrderCard {...product} />
                     ))
                 }
             </div>
