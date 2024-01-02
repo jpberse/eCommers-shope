@@ -2,11 +2,12 @@ import { useContext } from "react"
 import { ShoppingCartContext } from "../../Context";
 
 function OrderCard({ id, image, title, price, }) {
-    const { carProducts, setCartProducts } = useContext(ShoppingCartContext)
+    const { count, setCount, carProducts, setCartProducts } = useContext(ShoppingCartContext)
 
     function handleDelete(id) {
         const filteredProducts = carProducts.filter(product => product.id !== id)
         setCartProducts(filteredProducts)
+        setCount(count - 1);
     }
 
     return (

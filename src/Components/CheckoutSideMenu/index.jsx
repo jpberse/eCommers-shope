@@ -1,13 +1,27 @@
 import { useContext } from "react"
 import { ShoppingCartContext } from "../../Context";
 import { OrderCard } from "../OrderCard";
+import { totalPrice } from "../../utils";
 
 function CheckoutSideMenu() {
-    const { isCheckoutSideMenu, closeCheckoutMenu, carProducts, setCartProducts} = useContext(ShoppingCartContext)
+    const { isCheckoutSideMenu, closeCheckoutMenu, carProducts, setCartProducts, order, setOrder, setCount } = useContext(ShoppingCartContext)
+
+    function handleCheckout() {
+        const orderToAdd = {
+            date: '01.02.24',
+            products: carProducts,
+            totalProducts: carProducts.length,
+            totalPrice: totalPrice(carProducts)
+        }
+
+        setOrder([...order, orderToAdd]);
+        setCartProducts([]);
+        setCount(0);
+    }
 
     return(
-        <aside className={`${isCheckoutSideMenu ? 'flex' : 'hidden'} flex-col fixed right-0 top-[68px] border bg-white border-black rounded-lg w-[360px] h-[calc(100vh-68px)] m-2 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-gray-300'`}>
-            <div className='flex justify-between items-center'>
+        <aside className={`${isCheckoutSideMenu ? 'flex' : 'hidden'} flex-col fixed right-0 top-[68px] border bg-white border-black rounded-lg w-[360px] h-[calc(100vh-68px)] m-2 p-3`}>
+            <div className='flex justify-between items-center'> {/* header */}
                 <h2 className='font-medium text-xl p-6'>My Order</h2>
                 <button className='m-2' onClick={() => closeCheckoutMenu()}>
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -15,13 +29,20 @@ function CheckoutSideMenu() {
                     </svg>
                 </button>
             </div>
-            <div className='px-6 overflow-y-scroll'>
+            <div className='px-6 overflow-y-scroll flex-1'> {/* body */}
                 {
                     carProducts.map(product => (
-                        <OrderCard {...product} />
+                        <OrderCard {...product} key={product.id} />
                     ))
                 }
             </div>
+            <div className='px-6 mb-6'> {/* footer */}
+                <p className='flex justify-between items-center'>
+                    <span className='font-semibold text-lg'>Total:</span>
+                    <span className='font-medium text-2xl'>${totalPrice(carProducts)}</span>
+                </p>
+            </div>
+            <button className='w-full-2 bg-black py-3 text-white text-lg font-semibold rounded-lg my-3' onClick={() => handleCheckout()}>Checkout</button>
         </aside>
     )
 }

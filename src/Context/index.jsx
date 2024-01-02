@@ -20,6 +20,9 @@ export function ShoppingCartProvider ({ children }){
         }
     }
 
+    // shopping Cart · Order
+    const [order, setOrder] = useState([])
+
     // Product Detail · Open/close
     const [isProductDetailOpen, setIsProductDetailOpen] = useState(false)
     function toggleProductDetail() {
@@ -50,7 +53,9 @@ export function ShoppingCartProvider ({ children }){
             setCartProducts,
             isCheckoutSideMenu,
             openCheckoutMenu,
-            closeCheckoutMenu
+            closeCheckoutMenu,
+            order,
+            setOrder
         }}>
             {children}
         </ShoppingCartContext.Provider>

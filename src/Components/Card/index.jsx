@@ -15,7 +15,6 @@ function Card( { id, price, title, image, category, data} ) {
         setCount(count + 1);
         setCartProducts([...carProducts, productData])
         openCheckoutMenu();
-        console.log('CART: ', carProducts);
     }
 
     function renderIcon(id){
