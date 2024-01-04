@@ -3,8 +3,8 @@ function OrderCard({ id, image, title, price, handleDelete}) {
     return (
         <div className='flex justify-between items-center mb-3'>
             <div className='flex items-center gap-2'>
-                <figure className='w-20 h-20'>
-                    <img className='w-20 h-20 rounded-lg object-contain' src={image} alt={title}/>
+                <figure className='w-10 h-10'>
+                    <img className=' w-10 h-10 rounded-lg object-contain' src={image} alt={title}/>
                 </figure>
                 <p className='text-sm font-light'>{title}</p>
             </div>
