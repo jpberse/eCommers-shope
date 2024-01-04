@@ -12,7 +12,6 @@ function Card( { id, price, title, image, category, data} ) {
 
     function addProductsToCart(e, productData) {
         e.stopPropagation();
-        setCount(count + 1);
         setCartProducts([...carProducts, productData])
         openCheckoutMenu();
     }

@@ -3,7 +3,7 @@ import { useContext } from "react"
 import { ShoppingCartContext } from "../../Context"
 
 function Navbar() {
-const { count } = useContext(ShoppingCartContext)
+const { carProducts } = useContext(ShoppingCartContext)
 let menuLeft = [
     {
         to:'/',
@@ -72,7 +72,7 @@ let menuRigth = [
                     <path d="M7.5 21.25C7.5 22.2165 6.7165 23 5.75 23C4.7835 23 4 22.2165 4 21.25C4 20.2835 4.7835 19.5 5.75 19.5C6.7165 19.5 7.5 20.2835 7.5 21.25Z" fill="black"/>
                     <path d="M18.25 23C19.2165 23 20 22.2165 20 21.25C20 20.2835 19.2165 19.5 18.25 19.5C17.2835 19.5 16.5 20.2835 16.5 21.25C16.5 22.2165 17.2835 23 18.25 23Z" fill="black"/>
                 </svg>
-                {count}
+                {carProducts.length}
             </div>
         ),
         className: ''

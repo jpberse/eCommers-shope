@@ -1,10 +1,16 @@
-import { useContext } from "react"
+import { useContext } from "react";
+import { Link } from "react-router-dom";
 import { ShoppingCartContext } from "../../Context";
 import { OrderCard } from "../OrderCard";
 import { totalPrice } from "../../utils";
 
 function CheckoutSideMenu() {
     const { isCheckoutSideMenu, closeCheckoutMenu, carProducts, setCartProducts, order, setOrder, setCount } = useContext(ShoppingCartContext)
+
+    function handleDelete(ids) {
+        const filteredProducts = carProducts.filter(product => product.id !== ids)
+        setCartProducts(filteredProducts)
+    }
 
     function handleCheckout() {
         const orderToAdd = {
@@ -32,7 +38,7 @@ function CheckoutSideMenu() {
             <div className='px-6 overflow-y-scroll flex-1'> {/* body */}
                 {
                     carProducts.map(product => (
-                        <OrderCard {...product} key={product.id} />
+                        <OrderCard {...product} key={product.id} handleDelete={handleDelete}/>
                     ))
                 }
             </div>
@@ -41,8 +47,10 @@ function CheckoutSideMenu() {
                     <span className='font-semibold text-lg'>Total:</span>
                     <span className='font-medium text-2xl'>${totalPrice(carProducts)}</span>
                 </p>
+            <Link to='/my-orders/last'>
+                <button className='w-full bg-black py-3 text-white text-lg font-semibold rounded-lg my-3' onClick={() => handleCheckout()}>Checkout</button>
+            </Link>
             </div>
-            <button className='w-full-2 bg-black py-3 text-white text-lg font-semibold rounded-lg my-3' onClick={() => handleCheckout()}>Checkout</button>
         </aside>
     )
 }
