@@ -14,7 +14,9 @@ function CheckoutSideMenu() {
 
     function handleCheckout() {
         const date = new Date();
+        const uuid = crypto.randomUUID()
         const orderToAdd = {
+            id: uuid,
             date: date.toLocaleDateString(),
             products: carProducts,
             totalProducts: carProducts.length,

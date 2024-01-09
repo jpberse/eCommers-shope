@@ -12,10 +12,12 @@ function MyOrders() {
                 <h1>My Orders</h1>
             </header>
             {
-                order.map((order, index) => {
-                    <Link key={index} to={`/my-orders/${order.id}`}>
-                        <OrdersCard {...order}/>
-                    </Link>
+                order.map((order) => {
+                    return(
+                        <Link key={order.id} to={`/my-orders/${order.id}`}>
+                            <OrdersCard {...order} />
+                        </Link>
+                    )
                 })
             }
         </div>
