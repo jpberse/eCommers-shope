@@ -8,8 +8,8 @@ function MyOrders() {
 
     return(
         <div>
-            <header className='flex justify-center items-center relative w-80 '>
-                <h1>My Orders</h1>
+            <header className='flex justify-center items-center relative w-80 mb-4'>
+                <h1 className='font-medium text-xl'>My Orders</h1>
             </header>
             {
                 order.map((order) => {

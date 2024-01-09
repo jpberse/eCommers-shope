@@ -18,11 +18,11 @@ function MyOrder() {
                         </svg>
                     </button>
                 </Link>
-                <h1>My Order</h1>
+                <h1 className='font-medium text-xl'>My Order</h1>
             </header>
             <div className='flex flex-col w-80'>
             {currentOrder? currentOrder.products.map((product) => <OrderCard key={product.id} {...product} />) : order?.slice(-1)[0].products.map((product) => <OrderCard key={product.id} {...product} />)}
-            { }
+            
 
             </div>
         </div>
