@@ -3,7 +3,7 @@ import { ShoppingCartContext } from "../../Context";
 
 function Card( { id, price, title, image, category, data} ) {
 
-    const { count, setCount, toggleProductDetail, setProductToShow, carProducts, setCartProducts, openCheckoutMenu } = useContext(ShoppingCartContext)
+    const { toggleProductDetail, setProductToShow, carProducts, setCartProducts, openCheckoutMenu } = useContext(ShoppingCartContext)
 
     function showProduct(productDetail) {
         toggleProductDetail()

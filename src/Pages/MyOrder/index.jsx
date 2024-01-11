@@ -22,8 +22,6 @@ function MyOrder() {
             </header>
             <div className='flex flex-col w-80'>
             {currentOrder? currentOrder.products.map((product) => <OrderCard key={product.id} {...product} />) : order?.slice(-1)[0].products.map((product) => <OrderCard key={product.id} {...product} />)}
-            
-
             </div>
         </div>
     )
