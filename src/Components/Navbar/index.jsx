@@ -3,7 +3,7 @@ import { useContext } from "react"
 import { ShoppingCartContext } from "../../Context"
 
 function Navbar() {
-const { carProducts } = useContext(ShoppingCartContext)
+const { carProducts, setFilterCategory } = useContext(ShoppingCartContext)
 let menuLeft = [
     {
         to:'/',
@@ -16,28 +16,27 @@ let menuLeft = [
         className: ''
     },
     {
-        to:'/clothes',
-        text: 'Clothes',
+        to:'/mens-clothing',
+        text: "Men's clothing",
+        filterName:`men's clothing`,
+        className: ''
+    },
+    {
+        to:'/womens-clothing',
+        text: "Women's clothing",
+        filterName: "women's clothing",
         className: ''
     },
     {
         to:'/electronics',
         text: 'Electronics',
+        filterName:"electronics",
         className: ''
     },
     {
-        to:'/furnitures',
-        text: 'Furnitures',
-        className: ''
-    },
-    {
-        to:'/Toys',
-        text: 'Toys',
-        className: ''
-    },
-    {
-        to:'/others',
-        text: 'Others',
+        to:'/jewelery',
+        text: 'Jewelery',
+        filterName: 'jewelery',
         className: ''
     },
 ]
@@ -91,6 +90,7 @@ const activeStyle = 'underline underline-offset-4'
                     >
                         <NavLink  
                             to={item.to}
+                            onClick={() => setFilterCategory(item.filterName)}
                             className={({ isActive }) => isActive && index !== 0 ? activeStyle:undefined}
                         >
                             {item.text}

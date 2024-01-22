@@ -48,10 +48,13 @@ export function ShoppingCartProvider ({ children }){
     const [loading, setLoading] = useState(true)
 
     // Get products by title
-    const [searchBytitleBar, setSearchBytitleBar] = useState('')
+    const [filterTitle, setFilterTitle] = useState('')
+
+    // Get products by category
+    const [filterCategory, setFilterCategory] = useState('')
 
     function search(e) {
-        setSearchBytitleBar(e.target.value)
+        setFilterTitle(e.target.value)
     }
 
     useEffect(() => {
@@ -69,15 +72,40 @@ export function ShoppingCartProvider ({ children }){
         fetchData()
     }, [])
 
-    function filteredItemsBytitle(products, searchBytitleBar) {
-        return products?.filter(product => product.title.toLowerCase().includes(searchBytitleBar.toLowerCase()))
+    function filteredProductsBytitle(products, filterTitle) {
+        return products?.filter(product => product.title.toLowerCase().includes(filterTitle.toLowerCase()))
+    }
+    
+    function filteredProductsByCategory(products, filterCategory) {
+        return products?.filter(product => product.category.toLowerCase().includes(filterCategory.toLowerCase()))
+    }
+    
+    function filterBy(searchType, products, filterTitle, filterCategory) {
+        if (searchType === 'BY_TITLE') {
+            return filteredProductsBytitle(products, filterTitle)
+        }
+    
+        if (searchType === 'BY_CATEGORY') {
+            return filteredProductsByCategory(products, filterCategory)
+        }
+    
+        if (searchType === 'BY_TITLE_AND_CATEGORY') {
+            return filteredProductsByCategory(products, filterCategory).filter(product => product.title.toLowerCase().includes(filterTitle.toLowerCase()))
+        }
+    
+        if (!searchType) {
+            return products
+        }
     }
 
     useEffect(() => {
-        if(searchBytitleBar) setFilteredProducts(filteredItemsBytitle(products, searchBytitleBar))
-    }, [products, searchBytitleBar])
+        if (filterTitle && filterCategory) setFilteredProducts(filterBy('BY_TITLE_AND_CATEGORY', products, filterTitle, filterCategory))
+        if (filterTitle && !filterCategory) setFilteredProducts(filterBy('BY_TITLE', products, filterTitle, filterCategory))
+        if (!filterTitle && filterCategory) setFilteredProducts(filterBy('BY_CATEGORY', products, filterTitle, filterCategory))
+        if (!filterTitle && !filterCategory) setFilteredProducts(filterBy(null, products, filterTitle, filterCategory))
+    }, [products, filterTitle, filterCategory])
 
-    console.log(filteredProducts);
+    console.log(filterCategory);
 
     return (
         <ShoppingCartContext.Provider value={{
@@ -96,7 +124,9 @@ export function ShoppingCartProvider ({ children }){
             setOrder,
             products,
             search,
-            searchBytitleBar,
+            filterTitle,
+            filterCategory,
+            setFilterCategory,
             filteredProducts
         }}>
             {children}

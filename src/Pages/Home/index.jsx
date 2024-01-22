@@ -5,17 +5,17 @@ import { CheckoutSideMenu } from "../../Components/CheckoutSideMenu";
 import { ShoppingCartContext } from "../../Context";
 
 function Home() {
-    const { products, search, searchBytitleBar, filteredProducts } = useContext(ShoppingCartContext)
+    const { search, filteredProducts } = useContext(ShoppingCartContext)
 
 /*     if (!products) {
         return <div>Loading...</div>;
     } */
 
     function renderView() {
-        const productToRender = searchBytitleBar?.length > 0 ? filteredProducts : products
+        /* const productToRender = filterTitle?.length > 0 || filterCategory.length > 0 ? filteredProducts : products */
 
-        if(productToRender?.length > 0) {
-            return productToRender.map(product => (
+        if(filteredProducts?.length > 0) {
+            return filteredProducts.map(product => (
                 <Card key={product.id} data={product} {...product}/>
             ));
         } else {
