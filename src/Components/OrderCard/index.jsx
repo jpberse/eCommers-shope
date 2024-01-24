@@ -6,7 +6,7 @@ function OrderCard({ id, image, title, price, handleDelete}) {
                 <figure className='w-10 h-10'>
                     <img className=' w-10 h-10 rounded-lg object-contain' src={image} alt={title}/>
                 </figure>
-                <p className='text-sm font-light truncate ...'>{title}</p>
+                <p className='text-sm font-light truncate w-40'>{title}</p>
             </div>
             <div className='flex items-center'>
                 <p className='text-lg font-medium'>${price}</p>

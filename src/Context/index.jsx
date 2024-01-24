@@ -26,12 +26,15 @@ export function ShoppingCartProvider ({ children }){
 
     // Product Detail · Open/close
     const [isProductDetailOpen, setIsProductDetailOpen] = useState(false)
+    const [openModal, setOpenModal] = useState(false)
     function toggleProductDetail() {
         setIsProductDetailOpen(!isProductDetailOpen);
+        setOpenModal(!openModal)
     }
     
     // Product Detail · Show product
     const [productToShow, setProductToShow] = useState({})
+    
     
     // Checkout Side Menu · Open/close
     const [isCheckoutSideMenu, setIsCheckoutSideMenu] = useState(false)
@@ -48,10 +51,10 @@ export function ShoppingCartProvider ({ children }){
     const [loading, setLoading] = useState(true)
 
     // Get products by title
-    const [filterTitle, setFilterTitle] = useState('')
+    const [filterTitle, setFilterTitle] = useState(null)
 
     // Get products by category
-    const [filterCategory, setFilterCategory] = useState('')
+    const [filterCategory, setFilterCategory] = useState(null)
 
     function search(e) {
         setFilterTitle(e.target.value)
@@ -77,7 +80,7 @@ export function ShoppingCartProvider ({ children }){
     }
     
     function filteredProductsByCategory(products, filterCategory) {
-        return products?.filter(product => product.category.toLowerCase().includes(filterCategory.toLowerCase()))
+        return products?.filter(product => product.category.toLowerCase() === filterCategory.toLowerCase());
     }
     
     function filterBy(searchType, products, filterTitle, filterCategory) {
@@ -89,23 +92,16 @@ export function ShoppingCartProvider ({ children }){
             return filteredProductsByCategory(products, filterCategory)
         }
     
-        if (searchType === 'BY_TITLE_AND_CATEGORY') {
-            return filteredProductsByCategory(products, filterCategory).filter(product => product.title.toLowerCase().includes(filterTitle.toLowerCase()))
-        }
-    
         if (!searchType) {
             return products
         }
     }
 
     useEffect(() => {
-        if (filterTitle && filterCategory) setFilteredProducts(filterBy('BY_TITLE_AND_CATEGORY', products, filterTitle, filterCategory))
         if (filterTitle && !filterCategory) setFilteredProducts(filterBy('BY_TITLE', products, filterTitle, filterCategory))
         if (!filterTitle && filterCategory) setFilteredProducts(filterBy('BY_CATEGORY', products, filterTitle, filterCategory))
         if (!filterTitle && !filterCategory) setFilteredProducts(filterBy(null, products, filterTitle, filterCategory))
     }, [products, filterTitle, filterCategory])
-
-    console.log(filterCategory);
 
     return (
         <ShoppingCartContext.Provider value={{
@@ -113,6 +109,8 @@ export function ShoppingCartProvider ({ children }){
             setCount,
             toggleProductDetail,
             isProductDetailOpen,
+            openModal,
+            setOpenModal,
             productToShow,
             setProductToShow,
             carProducts,

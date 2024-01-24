@@ -6,7 +6,7 @@ function ProductDetail() {
     const { image, title, price, description } = {...productToShow}
 
     return(
-        <aside className={`${isProductDetailOpen ? 'flex' : 'hidden'} flex-col fixed right-0 top-[68px] border bg-white border-black rounded-lg w-[360px] h-[calc(100vh-68px)] m-2`}>
+        <div className={`${isProductDetailOpen ? 'flex' : 'hidden'} flex-col fixed top-[68px] border bg-white shadow-xl rounded-lg w-[360px] h-[calc(100vh-68px)] m-2`}>
             <div className='flex justify-between items-center'>
                 <h2 className='font-medium text-xl p-6'>Detail</h2>
                 <button className='m-2' onClick={() => toggleProductDetail()}>
@@ -23,7 +23,7 @@ function ProductDetail() {
                 <span className='font-medium text-md mb-2'>{title}</span>
                 <span className='font-light text-md'>{description}</span>
             </p>
-        </aside>
+        </div>
     )
 }
 

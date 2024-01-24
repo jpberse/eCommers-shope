@@ -18,7 +18,7 @@ let menuLeft = [
     {
         to:'/mens-clothing',
         text: "Men's clothing",
-        filterName:`men's clothing`,
+        filterName:"men's clothing",
         className: ''
     },
     {
