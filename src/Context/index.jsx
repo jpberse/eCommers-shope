@@ -3,6 +3,28 @@ import { apiUrl } from '../api'
 
 export const  ShoppingCartContext = createContext();
 
+export function initializeLocalStorage() {
+    const accountInLocalStorage = localStorage.getItem('account')
+    const signOutInLocalStorage = localStorage.getItem('sign-out')
+    let parsedAccount
+    let parsedSignOut
+
+    if(!accountInLocalStorage) {
+        localStorage.setItem('account', JSON.stringify({}))
+        parsedAccount = {}
+    } else {
+        parsedAccount = JSON.parse(accountInLocalStorage)
+    }
+
+    if(!signOutInLocalStorage) {
+        localStorage.setItem('sign-out', JSON.stringify(false))
+        parsedSignOut = false
+    } else {
+        parsedSignOut = JSON.parse(signOutInLocalStorage)
+    }
+
+}
+
 export function ShoppingCartProvider ({ children }){
     //Shopping Cart · Increment quantity
     const [count, setCount] = useState(0)
@@ -23,6 +45,13 @@ export function ShoppingCartProvider ({ children }){
 
     // shopping Cart · Order
     const [order, setOrder] = useState([])
+
+    // My account 
+    const [account, setAccount] = useState({})
+
+    // Sign Out
+
+    const [signOut, setSignOut] = useState(false)
 
     // Product Detail · Open/close
     const [isProductDetailOpen, setIsProductDetailOpen] = useState(false)
@@ -125,7 +154,11 @@ export function ShoppingCartProvider ({ children }){
             filterTitle,
             filterCategory,
             setFilterCategory,
-            filteredProducts
+            filteredProducts,
+            account,
+            setAccount,
+            signOut,
+            setSignOut
         }}>
             {children}
         </ShoppingCartContext.Provider>
