@@ -1,11 +1,11 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { ShoppingCartContext } from "../../Context";
 import { OrderCard } from "../OrderCard";
 import { totalPrice } from "../../utils";
 
 function CheckoutSideMenu() {
-    const { isCheckoutSideMenu, closeCheckoutMenu, carProducts, setCartProducts, order, setOrder, setCount } = useContext(ShoppingCartContext)
+    const { isCheckoutSideMenu, closeCheckoutMenu, carProducts, setCartProducts, order, setOrder, setCount, singOut } = useContext(ShoppingCartContext)
 
     function handleDelete(ids) {
         const filteredProducts = carProducts.filter(product => product.id !== ids)
@@ -51,7 +51,7 @@ function CheckoutSideMenu() {
                     <span className='font-medium text-2xl'>${totalPrice(carProducts)}</span>
                 </p>
             <Link to='/my-orders/last'>
-                <button className='w-full bg-black py-3 text-white text-lg font-semibold rounded-lg my-3' onClick={() => handleCheckout()}>Checkout</button>
+                <button className='w-full bg-black py-3 text-white text-lg font-semibold rounded-lg my-3' onClick={() => singOut ? <Navigate replace to={'/sign-in'} /> : handleCheckout()}>Checkout</button>
             </Link>
             </div>
         </aside>
