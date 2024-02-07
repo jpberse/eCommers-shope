@@ -46,7 +46,7 @@ function Card( { id, price, title, image, category, data} ) {
                 <img className='w-full h-full object-contain rounded-lg' src={image} alt={title} />
                 {renderIcon(id)}
             </figure>
-            <p className='flex justify-between p-2'>
+            <p className='flex justify-between p-2 items-center'>
                 <span className='text-sm font-light truncate'>{title}</span>
                 <span className='text-md font-medium'>${price}</span>
             </p>
